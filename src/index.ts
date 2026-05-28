@@ -4,7 +4,7 @@ import cors from "cors";
 import { env } from "bun";
 import { matchRouter } from "./routes/match.route";
 
-const HTTP_PORT = env.HTTP_PORT ? Number(env.HTTP_PORT) : undefined;
+const HTTP_PORT = env.HTTP_PORT ? Number(env.HTTP_PORT) : 8000;
 // const WS_PORT = env.WS_PORT ? Number(env.WS_PORT) : undefined;
 
 const app = express();
