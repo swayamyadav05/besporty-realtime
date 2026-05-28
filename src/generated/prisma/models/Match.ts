@@ -45,6 +45,7 @@ export type MatchMinAggregateOutputType = {
   homeScore: number | null
   awayScore: number | null
   startTime: Date | null
+  endTime: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +59,7 @@ export type MatchMaxAggregateOutputType = {
   homeScore: number | null
   awayScore: number | null
   startTime: Date | null
+  endTime: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -71,6 +73,7 @@ export type MatchCountAggregateOutputType = {
   homeScore: number
   awayScore: number
   startTime: number
+  endTime: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -96,6 +99,7 @@ export type MatchMinAggregateInputType = {
   homeScore?: true
   awayScore?: true
   startTime?: true
+  endTime?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -109,6 +113,7 @@ export type MatchMaxAggregateInputType = {
   homeScore?: true
   awayScore?: true
   startTime?: true
+  endTime?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -122,6 +127,7 @@ export type MatchCountAggregateInputType = {
   homeScore?: true
   awayScore?: true
   startTime?: true
+  endTime?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -222,6 +228,7 @@ export type MatchGroupByOutputType = {
   homeScore: number
   awayScore: number
   startTime: Date
+  endTime: Date
   createdAt: Date
   updatedAt: Date
   _count: MatchCountAggregateOutputType | null
@@ -258,6 +265,7 @@ export type MatchWhereInput = {
   homeScore?: Prisma.IntFilter<"Match"> | number
   awayScore?: Prisma.IntFilter<"Match"> | number
   startTime?: Prisma.DateTimeFilter<"Match"> | Date | string
+  endTime?: Prisma.DateTimeFilter<"Match"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
   commentary?: Prisma.CommentaryListRelationFilter
@@ -272,6 +280,7 @@ export type MatchOrderByWithRelationInput = {
   homeScore?: Prisma.SortOrder
   awayScore?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
+  endTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   commentary?: Prisma.CommentaryOrderByRelationAggregateInput
@@ -279,6 +288,7 @@ export type MatchOrderByWithRelationInput = {
 
 export type MatchWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  homeTeam_awayTeam_sport_startTime?: Prisma.MatchHomeTeamAwayTeamSportStartTimeCompoundUniqueInput
   AND?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
   OR?: Prisma.MatchWhereInput[]
   NOT?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
@@ -289,10 +299,11 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
   homeScore?: Prisma.IntFilter<"Match"> | number
   awayScore?: Prisma.IntFilter<"Match"> | number
   startTime?: Prisma.DateTimeFilter<"Match"> | Date | string
+  endTime?: Prisma.DateTimeFilter<"Match"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Match"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Match"> | Date | string
   commentary?: Prisma.CommentaryListRelationFilter
-}, "id">
+}, "id" | "homeTeam_awayTeam_sport_startTime">
 
 export type MatchOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -303,6 +314,7 @@ export type MatchOrderByWithAggregationInput = {
   homeScore?: Prisma.SortOrder
   awayScore?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
+  endTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.MatchCountOrderByAggregateInput
@@ -324,6 +336,7 @@ export type MatchScalarWhereWithAggregatesInput = {
   homeScore?: Prisma.IntWithAggregatesFilter<"Match"> | number
   awayScore?: Prisma.IntWithAggregatesFilter<"Match"> | number
   startTime?: Prisma.DateTimeWithAggregatesFilter<"Match"> | Date | string
+  endTime?: Prisma.DateTimeWithAggregatesFilter<"Match"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Match"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Match"> | Date | string
 }
@@ -337,6 +350,7 @@ export type MatchCreateInput = {
   homeScore?: number
   awayScore?: number
   startTime: Date | string
+  endTime: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   commentary?: Prisma.CommentaryCreateNestedManyWithoutMatchInput
@@ -351,6 +365,7 @@ export type MatchUncheckedCreateInput = {
   homeScore?: number
   awayScore?: number
   startTime: Date | string
+  endTime: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
   commentary?: Prisma.CommentaryUncheckedCreateNestedManyWithoutMatchInput
@@ -365,6 +380,7 @@ export type MatchUpdateInput = {
   homeScore?: Prisma.IntFieldUpdateOperationsInput | number
   awayScore?: Prisma.IntFieldUpdateOperationsInput | number
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentary?: Prisma.CommentaryUpdateManyWithoutMatchNestedInput
@@ -379,6 +395,7 @@ export type MatchUncheckedUpdateInput = {
   homeScore?: Prisma.IntFieldUpdateOperationsInput | number
   awayScore?: Prisma.IntFieldUpdateOperationsInput | number
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   commentary?: Prisma.CommentaryUncheckedUpdateManyWithoutMatchNestedInput
@@ -393,6 +410,7 @@ export type MatchCreateManyInput = {
   homeScore?: number
   awayScore?: number
   startTime: Date | string
+  endTime: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -406,6 +424,7 @@ export type MatchUpdateManyMutationInput = {
   homeScore?: Prisma.IntFieldUpdateOperationsInput | number
   awayScore?: Prisma.IntFieldUpdateOperationsInput | number
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -419,8 +438,16 @@ export type MatchUncheckedUpdateManyInput = {
   homeScore?: Prisma.IntFieldUpdateOperationsInput | number
   awayScore?: Prisma.IntFieldUpdateOperationsInput | number
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type MatchHomeTeamAwayTeamSportStartTimeCompoundUniqueInput = {
+  homeTeam: string
+  awayTeam: string
+  sport: string
+  startTime: Date | string
 }
 
 export type MatchCountOrderByAggregateInput = {
@@ -432,6 +459,7 @@ export type MatchCountOrderByAggregateInput = {
   homeScore?: Prisma.SortOrder
   awayScore?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
+  endTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -450,6 +478,7 @@ export type MatchMaxOrderByAggregateInput = {
   homeScore?: Prisma.SortOrder
   awayScore?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
+  endTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -463,6 +492,7 @@ export type MatchMinOrderByAggregateInput = {
   homeScore?: Prisma.SortOrder
   awayScore?: Prisma.SortOrder
   startTime?: Prisma.SortOrder
+  endTime?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -520,6 +550,7 @@ export type MatchCreateWithoutCommentaryInput = {
   homeScore?: number
   awayScore?: number
   startTime: Date | string
+  endTime: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -533,6 +564,7 @@ export type MatchUncheckedCreateWithoutCommentaryInput = {
   homeScore?: number
   awayScore?: number
   startTime: Date | string
+  endTime: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -562,6 +594,7 @@ export type MatchUpdateWithoutCommentaryInput = {
   homeScore?: Prisma.IntFieldUpdateOperationsInput | number
   awayScore?: Prisma.IntFieldUpdateOperationsInput | number
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -575,6 +608,7 @@ export type MatchUncheckedUpdateWithoutCommentaryInput = {
   homeScore?: Prisma.IntFieldUpdateOperationsInput | number
   awayScore?: Prisma.IntFieldUpdateOperationsInput | number
   startTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endTime?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -619,6 +653,7 @@ export type MatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   homeScore?: boolean
   awayScore?: boolean
   startTime?: boolean
+  endTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   commentary?: boolean | Prisma.Match$commentaryArgs<ExtArgs>
@@ -634,6 +669,7 @@ export type MatchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   homeScore?: boolean
   awayScore?: boolean
   startTime?: boolean
+  endTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["match"]>
@@ -647,6 +683,7 @@ export type MatchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   homeScore?: boolean
   awayScore?: boolean
   startTime?: boolean
+  endTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["match"]>
@@ -660,11 +697,12 @@ export type MatchSelectScalar = {
   homeScore?: boolean
   awayScore?: boolean
   startTime?: boolean
+  endTime?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "homeTeam" | "awayTeam" | "sport" | "status" | "homeScore" | "awayScore" | "startTime" | "createdAt" | "updatedAt", ExtArgs["result"]["match"]>
+export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "homeTeam" | "awayTeam" | "sport" | "status" | "homeScore" | "awayScore" | "startTime" | "endTime" | "createdAt" | "updatedAt", ExtArgs["result"]["match"]>
 export type MatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   commentary?: boolean | Prisma.Match$commentaryArgs<ExtArgs>
   _count?: boolean | Prisma.MatchCountOutputTypeDefaultArgs<ExtArgs>
@@ -686,6 +724,7 @@ export type $MatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     homeScore: number
     awayScore: number
     startTime: Date
+    endTime: Date
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["match"]>
@@ -1120,6 +1159,7 @@ export interface MatchFieldRefs {
   readonly homeScore: Prisma.FieldRef<"Match", 'Int'>
   readonly awayScore: Prisma.FieldRef<"Match", 'Int'>
   readonly startTime: Prisma.FieldRef<"Match", 'DateTime'>
+  readonly endTime: Prisma.FieldRef<"Match", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Match", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Match", 'DateTime'>
 }

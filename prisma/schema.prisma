@@ -27,10 +27,13 @@ model Match {
   homeScore Int         @default(0)
   awayScore Int         @default(0)
   startTime DateTime
+  endTime   DateTime
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
 
   commentary Commentary[]
+
+  @@unique([homeTeam, awayTeam, sport, startTime])
 }
 
 model Commentary {

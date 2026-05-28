@@ -80,6 +80,7 @@ export const MatchScalarFieldEnum = {
   homeScore: 'homeScore',
   awayScore: 'awayScore',
   startTime: 'startTime',
+  endTime: 'endTime',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
