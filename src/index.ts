@@ -1,10 +1,11 @@
-import { WebSocketServer } from "ws";
+// import { WebSocketServer } from "ws";
 import express from "express";
 import cors from "cors";
 import { env } from "bun";
+import { matchRouter } from "./routes/match.route";
 
-const HTTP_PORT = env.HTTP_PORT ? Number(env.WS_PORT) : undefined;
-const WS_PORT = env.WS_PORT ? Number(env.WS_PORT) : undefined;
+const HTTP_PORT = env.HTTP_PORT ? Number(env.HTTP_PORT) : undefined;
+// const WS_PORT = env.WS_PORT ? Number(env.WS_PORT) : undefined;
 
 const app = express();
 app.use(cors());
@@ -25,6 +26,8 @@ app.get("/", (req, res) => {
     message: "Health check",
   });
 });
+
+app.use("/api/v1/matches", matchRouter);
 
 app.listen(HTTP_PORT, () => {
   console.log(`Server is running on http://localhost:${HTTP_PORT}`);
