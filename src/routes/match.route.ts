@@ -71,13 +71,12 @@ matchRouter.post("/", async (req: Request, res: Response) => {
       e.code === "P2002"
     ) {
       return res.status(409).json({
-        error: "A match with theese details already exists",
+        error: "A match with these details already exists",
       });
     }
 
     return res.status(500).json({
       error: "Failed to create match",
-      details: JSON.stringify(e),
     });
   }
 });
