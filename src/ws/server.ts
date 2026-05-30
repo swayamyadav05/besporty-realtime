@@ -1,10 +1,7 @@
-import { env } from "bun";
 import type { Server } from "http";
 import { WebSocket } from "ws";
 import { WebSocketServer } from "ws";
 import type { Match } from "../generated/prisma/client";
-
-const WS_PORT = env.WS_PORT ? Number(env.WS_PORT) : 8080;
 
 function sendJson(socket: WebSocket, payload: object) {
   if (socket.readyState !== WebSocket.OPEN) return;
@@ -28,11 +25,35 @@ export function attachWebsocketServer(server: Server) {
     maxPayload: 1024 * 1024,
   });
 
-  wss.on("connection", (socket: WebSocket) => {
-    sendJson(socket, { type: "welcome" });
+  const isAlive = new WeakMap<WebSocket, boolean>();
 
+  function onPong(this: WebSocket) {
+    isAlive.set(this, true);
+  }
+
+  // Heartbeat interval
+  const heartBeat = setInterval(() => {
+    for (const client of wss.clients) {
+      if (client.readyState !== WebSocket.OPEN) continue;
+
+      if (isAlive.get(client) === false) {
+        client.terminate();
+        continue;
+      }
+
+      isAlive.set(client, false);
+      client.ping();
+    }
+  }, 30_000);
+
+  wss.on("connection", (socket: WebSocket) => {
+    isAlive.set(socket, true);
+    socket.on("pong", onPong);
     socket.on("error", console.error);
+    sendJson(socket, { type: "welcome" });
   });
+
+  wss.on("close", () => clearInterval(heartBeat));
 
   function broadcastMatchCreated(match: Match) {
     broadcast(wss, { type: "match_created", data: match });
