@@ -4,7 +4,7 @@ import { WebSocketServer } from "ws";
 import type { Match } from "../generated/prisma/client";
 import type { createCommentarySchema } from "../validations/commentary";
 import type { RawData } from "ws";
-import type z from "zod";
+import type { z } from "zod";
 
 const matchSubscribers = new Map<string, Set<WebSocket>>();
 
@@ -97,7 +97,7 @@ export function attachWebsocketServer(server: Server) {
       sendJson(socket, { type: "error", message: "Invalid JSON" });
     }
 
-    if (message?.type === "subscribe" && message.matchId) {
+    if (message?.type === "subscribe") {
       subscribe(message.matchId, socket);
       subscriptions.get(socket)?.add(message.matchId);
       sendJson(socket, {
@@ -106,7 +106,7 @@ export function attachWebsocketServer(server: Server) {
       });
     }
 
-    if (message?.type === "unsubscribe" && message.matchId) {
+    if (message?.type === "unsubscribe") {
       unsubscribe(message.matchId, socket);
       subscriptions.get(socket)?.delete(message.matchId);
       sendJson(socket, {

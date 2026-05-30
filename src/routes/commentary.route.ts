@@ -80,11 +80,15 @@ commentaryRouter.post("/:id", async (req: Request, res: Response) => {
       },
     });
 
-    if (res.app.locals.broadcastCommentary) {
-      res.app.locals.broadcastCommentary(
-        commentary.matchId,
-        commentary,
-      );
+    try {
+      if (res.app.locals.broadcastCommentary) {
+        res.app.locals.broadcastCommentary(
+          commentary.matchId,
+          commentary,
+        );
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Internal Server Error" });
     }
 
     return res.status(201).json({ data: [commentary] });
